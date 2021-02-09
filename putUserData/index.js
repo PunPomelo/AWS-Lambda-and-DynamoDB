@@ -12,9 +12,9 @@ exports.handler = async (event, context, callback) => {
   const params = {
     TableName: 'Users',
     Item: {
-      id: '12345', // S = String type
-      firstname: 'Jennifer',
-      lastname: 'White',
+      id: '67890', // S = String type
+      firstname: 'Bob',
+      lastname: 'Johnson',
     },
   };
 
