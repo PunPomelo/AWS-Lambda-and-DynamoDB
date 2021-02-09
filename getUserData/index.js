@@ -9,17 +9,34 @@ exports.handler = async (event, context, callback) => {
     region: 'us-east-2',
   }); // make dynamodb obj to standard json
 
+  let responseBody = '';
+  let statusCode = 0;
+
+  const { id } = event.pathParameters;
+
   const params = {
     TableName: 'Users',
     Key: {
-      id: '12345', // S = String type
+      id: id, // S = String type
     },
   };
 
   try {
     const data = await documentClient.get(params).promise();
-    console.log(data);
+    responseBody = JSON.stringify(data.Item);
+    statusCode = 200;
   } catch (err) {
-    console.log(err);
+    responseBody = `Unable to get user data`;
+    statusCode = 403;
   }
+
+  const response = {
+    statusCode: statusCode,
+    headers: {
+      myHeader: 'test',
+    },
+    body: responseBody,
+  };
+
+  return response;
 };
