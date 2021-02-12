@@ -1,9 +1,10 @@
 # Local .terraform directories
 **/.terraform/*
 
+# this is very important files. you should keep it in terraform cloud or where you want
 # .tfstate files
-*.tfstate
-*.tfstate.*
+# *.tfstate
+# *.tfstate.*
 
 # Crash log files
 crash.log
