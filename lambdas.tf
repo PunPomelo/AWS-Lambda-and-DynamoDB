@@ -10,7 +10,7 @@
 #   region = "us-west-1"
 # }
 
-resource "aws_lambda_function" "getUserData" {
+resource "aws_lambda_function" "getUserDataTF" {
   function_name = "getUserData"
 
   # The bucket name as created earlier with "aws s3api create-bucket"
