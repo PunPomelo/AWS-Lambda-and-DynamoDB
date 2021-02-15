@@ -20,12 +20,12 @@ resource "aws_api_gateway_method" "UserAPIMethodPOST" {
   resource_id    = aws_api_gateway_resource.UserAPIResource.id
   http_method    = "POST"
   authorization  = "NONE"
-  request_models = { "application/json" = "usermodel" }
+  request_models = { "application/json" = "userpostmodel" }
 
 
   # helps terraform destroy order
   depends_on = [
-    aws_api_gateway_model.UserModel,
+    aws_api_gateway_model.UserPostModel,
   ]
 
   request_parameters = {
@@ -75,16 +75,16 @@ resource "aws_api_gateway_method_response" "UserAPIMethodGETResponse" {
   status_code = "200"
 }
 
-resource "aws_api_gateway_model" "UserModel" {
+resource "aws_api_gateway_model" "UserPostModel" {
   rest_api_id  = aws_api_gateway_rest_api.UserAPI.id
-  name         = "usermodel"
+  name         = "userpostmodel"
   description  = "a JSON schema"
   content_type = "application/json"
 
   schema = <<EOF
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "UserModel",
+    "title": "UserPostModel",
     "type": "object",
     "properties": {
         "id": { "type": "string"},
