@@ -23,9 +23,9 @@ resource "aws_api_gateway_method" "UserAPIMethodPOST" {
   # request_models = {
   #   "content-type" = "application/json"
   # }
-  # request_parameters = {
-  #   "method.request.header.content-type" = true
-  # }
+  request_parameters = {
+    "method.request.header.content-type" = true
+  }
 }
 
 resource "aws_api_gateway_method" "UserAPIMethodGET" {
@@ -33,6 +33,9 @@ resource "aws_api_gateway_method" "UserAPIMethodGET" {
   resource_id   = aws_api_gateway_resource.GetUserAPIResource.id
   http_method   = "GET"
   authorization = "NONE"
+  request_parameters = {
+    "method.request.header.content-type" = true
+  }
 }
 
 resource "aws_api_gateway_integration" "UserAPIIntMethodPOST" {
