@@ -16,13 +16,18 @@ resource "aws_api_gateway_resource" "GetUserAPIResource" {
 }
 
 resource "aws_api_gateway_method" "UserAPIMethodPOST" {
-  rest_api_id   = aws_api_gateway_rest_api.UserAPI.id
-  resource_id   = aws_api_gateway_resource.UserAPIResource.id
-  http_method   = "POST"
-  authorization = "NONE"
-  # request_models = {
-  #   "content-type" = "application/json"
-  # }
+  rest_api_id    = aws_api_gateway_rest_api.UserAPI.id
+  resource_id    = aws_api_gateway_resource.UserAPIResource.id
+  http_method    = "POST"
+  authorization  = "NONE"
+  request_models = { "application/json" = "usermodel" }
+
+
+  # helps terraform destroy order
+  depends_on = [
+    aws_api_gateway_model.UserModel,
+  ]
+
   request_parameters = {
     "method.request.header.content-type" = true
   }
@@ -70,16 +75,23 @@ resource "aws_api_gateway_method_response" "UserAPIMethodGETResponse" {
   status_code = "200"
 }
 
-# resource "aws_api_gateway_model" "UserModel" {
-#   rest_api_id  = aws_api_gateway_rest_api.UserAPI.id
-#   name         = "usermodel"
-#   description  = "a JSON schema"
-#   content_type = "application/json"
+resource "aws_api_gateway_model" "UserModel" {
+  rest_api_id  = aws_api_gateway_rest_api.UserAPI.id
+  name         = "usermodel"
+  description  = "a JSON schema"
+  content_type = "application/json"
 
-#   schema = <<EOF
-# {
-#   "type": "object"
-# }
-# EOF
-# }
+  schema = <<EOF
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "UserModel",
+    "type": "object",
+    "properties": {
+        "id": { "type": "string"},
+        "firstname": { "type": "string"},
+        "lastname": { "type": "string"}
+    }
+}
+EOF
+}
 
