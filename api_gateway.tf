@@ -66,6 +66,9 @@ resource "aws_api_gateway_method_response" "UserAPIMethodPOSTResponse" {
   resource_id = aws_api_gateway_resource.UserAPIResource.id
   http_method = aws_api_gateway_method.UserAPIMethodPOST.http_method
   status_code = "200"
+  # response_models = {
+  #   "application/json" = ""
+  # }
 }
 
 resource "aws_api_gateway_method_response" "UserAPIMethodGETResponse" {
