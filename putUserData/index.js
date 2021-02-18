@@ -1,12 +1,12 @@
 'use strict';
 const AWS = require('aws-sdk');
 
-AWS.config.update({ region: 'us-east-2' });
+AWS.config.update({ region: 'us-west-1' });
 
 exports.handler = async (event, context, callback) => {
   const ddb = new AWS.DynamoDB({ apiVersion: '2012-10-08' });
   const documentClient = new AWS.DynamoDB.DocumentClient({
-    region: 'us-east-2',
+    region: 'us-west-1',
   }); // make dynamodb obj to standard json
 
   const { id, firstname, lastname } = JSON.parse(event.body);
