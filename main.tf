@@ -4,6 +4,14 @@ terraform {
       source = "hashicorp/aws"
     }
   }
+
+  backend "remote" {
+    organization = "pomelo-test"
+
+    workspaces {
+      name = "AWS-Lambda-and-DynamoDB"
+    }
+  }
 }
 
 provider "aws" {
