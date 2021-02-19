@@ -1,5 +1,6 @@
 'use strict';
 const AWS = require('aws-sdk');
+const R = require('ramda');
 
 AWS.config.update({ region: 'us-west-1' });
 
@@ -9,7 +10,8 @@ exports.handler = async (event, context, callback) => {
     region: 'us-west-1',
   }); // make dynamodb obj to standard json
 
-  const { id } = event.pathParameters;
+  const id = R.path(['pathParameters', 'id'], event);
+  // const { id } = event.pathParameters;
 
   const params = {
     TableName: 'Users',
