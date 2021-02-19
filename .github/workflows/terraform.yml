@@ -3,6 +3,8 @@ name: Terraform
 on:
   workflow_run:
     workflows: ["Lambdas"]
+    release: 
+      types: [released]
     types:
       - completed
 
