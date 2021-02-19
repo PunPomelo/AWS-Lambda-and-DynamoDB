@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: zip getUserData.zip ./getUserData/index.js
-      - uses: stcalica/update-lambda@beta
+      - uses: stcalica/update-lambda@0.0.2
         with:
           package: lambda.zip
           function-name: getUserData
