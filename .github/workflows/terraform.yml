@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  lambda:
+  lambda-first:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -16,6 +16,18 @@ jobs:
         with:
           package: lambda.zip
           function-name: getUserData
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_SECRET_ID: ${{ secrets.AWS_SECRET_ID }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+  lambda-second:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: zip -j lambda.zip ./putUserData/index.js
+      - uses: stcalica/update-lambda@0.0.2
+        with:
+          package: lambda.zip
+          function-name: putUserData
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_SECRET_ID: ${{ secrets.AWS_SECRET_ID }}
           AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
