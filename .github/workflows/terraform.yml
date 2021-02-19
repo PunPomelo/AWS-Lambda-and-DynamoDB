@@ -10,7 +10,6 @@ jobs:
   terraform:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: "Terraform"
-    needs: [lambda-first, lambda-second]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
