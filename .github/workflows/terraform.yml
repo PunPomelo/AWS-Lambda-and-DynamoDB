@@ -35,6 +35,7 @@ jobs:
           AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
   terraform:
     name: "Terraform"
+    needs: [lambda-first, lambda-second]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
