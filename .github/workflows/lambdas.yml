@@ -1,0 +1,7 @@
+name: "Lambdas"
+
+on:
+  workflow_run:
+    workflows: ["Terraform"]
+    types:
+      - completed
