@@ -1,4 +1,4 @@
-name: "Lambdas"
+name: Lambdas
 
 on:
   push:
