@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: cd getUserData && npm install
-      - run: cd getUserData && zip -r ../getUserData.zip .
+      - run: cd getUserData && zip -r ../lambda.zip .
       - uses: stcalica/update-lambda@0.0.2
         with:
           package: lambda.zip
