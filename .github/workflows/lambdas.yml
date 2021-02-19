@@ -1,7 +1,34 @@
 name: "Lambdas"
 
 on:
-  workflow_run:
-    workflows: ["Terraform"]
-    types:
-      - completed
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  lambda-first:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: cd getUserData && npm install
+      - run: cd getUserData && zip -r ../lambda.zip .
+      - uses: stcalica/update-lambda@0.0.2
+        with:
+          package: lambda.zip
+          function-name: getUserData
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_SECRET_ID: ${{ secrets.AWS_SECRET_ID }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+  lambda-second:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: zip -j lambda.zip ./putUserData/index.js
+      - uses: stcalica/update-lambda@0.0.2
+        with:
+          package: lambda.zip
+          function-name: putUserData
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_SECRET_ID: ${{ secrets.AWS_SECRET_ID }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
