@@ -5,11 +5,8 @@ on:
     workflows: ["Lambdas"]
     types:
       - completed
-
-  # push:
-  #   branches:
-  #     - master
-  # pull_request:
+  
+  pull_request:
 
 jobs:
   terraform:
