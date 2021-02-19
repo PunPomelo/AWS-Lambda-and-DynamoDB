@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: zip getUserData.zip ./getUserData/index.js
+      - run: zip lambda.zip ./getUserData/index.js
       - uses: stcalica/update-lambda@0.0.2
         with:
           package: lambda.zip
