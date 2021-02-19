@@ -6,11 +6,13 @@ on:
       - master
   pull_request:
 
+# TODO: make jobs run in sequence
 jobs:
   lambda-first:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      - run: cd getUserData && npm install
       - run: zip -j lambda.zip ./getUserData/index.js
       - uses: stcalica/update-lambda@0.0.2
         with:
