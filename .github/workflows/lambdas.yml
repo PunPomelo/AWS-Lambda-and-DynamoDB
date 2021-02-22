@@ -10,6 +10,8 @@ jobs:
   lambda-first:
     runs-on: ubuntu-latest
     steps:
+      - name: Echo github event
+        run: echo `github event name = ${{ github.event_name}}`
       - uses: actions/checkout@master
       - run: cd getUserData && npm install
       - run: cd getUserData && zip -r ../lambda.zip .
